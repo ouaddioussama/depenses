@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Depenses</title>
+
+
+
+</h:head>
+
+<h:body>
+	<h:form id="md">
+
+		<p:growl autoUpdate="true" />
+
+		<p:panel header="Listes Depenses Caisses ">
+			<p:separator></p:separator>
+			<p:commandButton value="Actualiser"
+				actionListener="#{depenseService.init}" update="index" />
+
+			<p:dataTable value="#{depenseService.listdepenseCaisse}" var="t"
+				id="checkboxDT" rows="10" rowKey="#{t.id}" rowIndexVar="rowIndex"
+				paginator="true" editable="true"
+				selection="#{depenseService.selectedDepensesCaisse}"
+				immediate="true"
+				filteredValue="#{depenseService.listdepenseCaisseFiltered}"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:ajax event="rowEdit" listener="#{depenseService.onRowEdit}" />
+
+				<p:ajax event="rowSelect" listener="#{depenseService.onSelect}"
+					update="index:ImpressionCaisse" />
+
+				<p:column selectionMode="multiple"
+					style="width:16px;text-align:center" update="index:ImpressionCaisse" />
+
+				<p:column headerText="reference" style="text-align: left; "
+					filterBy="#{t.reference}">
+					<h:outputText value="#{t.reference}" />
+				</p:column>
+
+
+
+				<p:column headerText="motif" style="text-align: left; "
+					 >
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{t.motif}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{t.motif}" style="width:96%"
+								label="lib_depot" />
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+
+
+				<p:column headerText="beneficiaire" style="width:10%;text-align: left; "
+					filterBy="#{t.beneficiare}">
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{t.beneficiare}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{t.beneficiare}" style="width:96%"
+								label="lib_depot" />
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+
+
+
+				<p:column headerText="montant" style="width:10%;text-align: left; "
+					 >
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{t.montant}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{t.montant}" style="width:96%"
+								label="lib_depot" />
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+
+				<p:column headerText="montant lettre"
+					style="width:20%;text-align: left; "  >
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{t.montant_lettre}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{t.montant_lettre}" style="width:96%"
+								label="lib_depot" />
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<p:column headerText="pieces jointe"
+					style="width:10%;text-align: left; " >
+
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{t.pieces_jointe}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{t.pieces_jointe}" style="width:96%"
+								label="lib_depot" />
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+
+				<h:outputText value="#{t.dateOperation}">
+					<f:convertDateTime pattern="dd-MM-yyyy" />
+				</h:outputText>
+
+
+
+				<p:column style="width:5%;" headerText="modification">
+					<p:rowEditor update="index:md" />
+				</p:column>
+
+				<p:column headerText="Delete" style="width:10%;">
+
+					<p:commandButton value="Delete"
+						actionListener="#{depenseService.delete(t)}" update="index:md">
+						<p:confirm header="Confirmation" message="Are you sure?"
+							icon="ui-icon-alert" />
+					</p:commandButton>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Yes" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
+				</p:column>
+				
+				<f:facet name="footer">
+					<p:commandButton process="checkboxDT"
+						update="index:md:multiCarDetail index:ImpressionCaisse" icon="pi pi-search" value="Valider"
+						oncomplete="PF('multiCarDialog').show()" />
+				</f:facet>
+				
+
+			</p:dataTable>
+
+			
+				
+			<p:dialog header="Depenses Caisses" widgetVar="multiCarDialog"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+				width="220">
+				<p:outputPanel id="multiCarDetail" style="text-align:center;">
+					<ui:repeat value="#{depenseService.selectedDepensesCaisse}" var="car">
+						<h:outputText value="#{car.reference} - #{car.montant}"
+							style="display:block" />
+					</ui:repeat>
+				</p:outputPanel>
+			</p:dialog>
+
+ 
+		</p:panel>
+		<p:separator></p:separator>
+
+
+		<!--  
+
+		<p:commandButton value="Impression" style="margin-left: 45%;width:10%"
+			update="index:ImpressionCaisse" action="impression_caisse.xhtml"
+			ajax="false" onclick="this.form.target='_blank'"
+			styleClass="no-print" />
+
+-->
+
+	</h:form>
+
+</h:body>
+</html>
+

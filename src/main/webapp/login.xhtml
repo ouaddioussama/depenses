@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head>
+
+<h:body styleClass="login">
+	<h:form>
+
+		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+		<div align="center" style="height: 170px">
+			<h3>
+
+				<span 
+					style="color: white; background-color: ;
+					 margin-left: 0px; font-size: 24px; font-weight: bold; font-family: Times New Roman, Times, serif;">
+				</span>
+			</h3>
+		</div>
+		<div align="center">
+
+
+			<p:panelGrid columns="2" cellpadding="2" styleClass="loginUser">
+
+				<h:outputLabel value="Nom"
+					style="font-weight: bold;font-size: 17px ;color:blue " />
+
+				<p:inputText id="nom" style="width:90%"
+					value="#{loginService.employeetoLog.nom}" required="true"
+					label="nom" />
+
+				<h:outputLabel value="Mot de passe"
+					style="font-weight: bold;;font-size: 17px;color:blue " />
+
+				<p:password id="password" style="width:90%"
+					value="#{loginService.employeetoLog.pass_word}" required="true"
+					label="password" />
+
+			</p:panelGrid>
+
+			<br></br>
+			<p:commandButton value="Login" style="margin-left:5%;width:10%"
+				update="@form" actionListener="#{loginService.login2}" />
+
+
+		</div>
+	</h:form>
+
+
+
+
+
+</h:body>
+</html>
+

@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head>
+<h:body styleClass="Body">
+
+
+	<h:form id="add">
+		<p:growl id="growl" life="1000" showDetail="true" />
+
+		<p:panel header="Ajout Information Depense Caisse " styleClass="text_normal"
+			style="width:100%">
+			<p:panelGrid columns="2" id="panelmodel"
+				style="color:blue;width:100%" cellpadding="4">
+
+				<h:outputLabel value="N°" styleClass="text_normal" />
+				<h:outputLabel
+					value="#{fn:length(depenseService.listdepenseCaisse)+1}/#{depenseService.year}"
+					styleClass="text_normal" />
+
+
+
+				<h:outputLabel value="beneficiare" styleClass="text_normal" />
+				<p:inputText style="width:80%"
+					value="#{depenseService.objectToInsert.beneficiare}" />
+
+
+				<h:outputLabel value="motif" styleClass="text_normal" />
+				<p:inputText style="width:80%"
+					value="#{depenseService.objectToInsert.motif}" />
+
+				<h:outputLabel value="montant" styleClass="text_normal" />
+				<p:inputText style="width:80%"
+					value="#{depenseService.objectToInsert.montant}">
+					<p:ajax event="keyup" update="out1"
+						listener="#{depenseService.calcmontantLettre}" />
+				</p:inputText>
+
+				<h:outputLabel value="montant lettre" styleClass="text_normal" />
+				<h:outputLabel
+					value="#{depenseService.objectToInsert.montant_lettre}"
+					styleClass="text_normal" id="out1" />
+
+
+				<h:outputLabel value="date" styleClass="text_normal" />
+				<h:outputLabel
+					value="#{depenseService.objectToInsert.dateOperation}"
+					styleClass="text_normal">
+					<f:convertDateTime pattern="dd-MM-yyyy" />
+				</h:outputLabel>
+
+			</p:panelGrid>
+
+
+			<p:commandButton value="ajouter" style="margin-left: 45%;width:10%"
+				actionListener="#{depenseService.createDepenseCaisse}" update="index:add index:md"
+				styleClass="no-print" />
+
+		</p:panel>
+		<br></br>
+
+
+	</h:form>
+   <!--  
+	<h:form id="display">
+
+
+		<p:commandButton value="print" type="button" icon="pi pi-print"
+			styleClass="p-d-block p-shadow-2 p-mb-3">
+			<p:printer target="index:add" />
+		</p:commandButton>
+	</h:form>-->
+</h:body>
+</html>

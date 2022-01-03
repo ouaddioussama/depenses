@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head>
+<h:body styleClass="Body">
+
+
+	<h:form id="ImpressionCaisse">
+		<p:growl id="growl" life="1000" showDetail="true" />
+		<ui:repeat value="#{depenseService.selectedDepensesCaisse}"
+			var="objectToSelectCaisse">
+
+			<p:panel header="DEPENSE CAISSE " styleClass="text_normal"
+				style="width:100%">
+				<p:panelGrid id="grid" columns="2" cellpadding="5"
+					styleClass="panelGrid"
+					style="border:none;margin:0 auto;width:500px;">
+
+
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="N°" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="#{objectToSelectCaisse.reference}" />
+						</p:column>
+					</p:row>
+
+
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="BENEFICIAIRE" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="#{objectToSelectCaisse.beneficiare}" />
+						</p:column>
+					</p:row>
+
+
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="MOTIF" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="#{objectToSelectCaisse.motif}" />
+						</p:column>
+					</p:row>
+
+
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="MONTANT" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="#{objectToSelectCaisse.montant}" />
+						</p:column>
+					</p:row>
+
+
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="MONTANT LETTRE" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="#{objectToSelectCaisse.montant_lettre}" />
+						</p:column>
+					</p:row>
+
+
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="Date" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="#{objectToSelectCaisse.dateOperation}">
+								<f:convertDateTime pattern="dd-MM-yyyy" />
+							</h:outputText>
+						</p:column>
+					</p:row>
+
+
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="PIECE JOINTE" />
+						</p:column>
+
+					</p:row>
+					<p:row>
+						<p:column style="width:100%">
+							<h:outputText value="#{objectToSelectCaisse.pieces_jointe}" />
+						</p:column>
+					</p:row>
+
+				</p:panelGrid>
+
+
+				<br></br>
+				<br></br>
+				<br></br>
+
+				<p:panelGrid columns="4" id="panelmodelDet" styleClass="ui-noborder"
+					style="width:100%" cellpadding="4">
+
+
+					<h:outputLabel value="Caissier" styleClass="text_normal" />
+					<h:outputLabel value="Bénéficiaire" styleClass="text_normal" />
+					<h:outputLabel value="Responsable Financier"
+						styleClass="text_normal" />
+					<h:outputLabel value="Directeur Général" styleClass="text_normal" />
+
+				</p:panelGrid>
+
+			</p:panel>
+
+			<br></br>
+			<br></br>
+			<br></br>
+
+
+		</ui:repeat>
+		<br></br>
+
+
+	</h:form>
+	<h:form id="displayCaisse">
+
+
+		<p:commandButton value="Valider l'impression" type="button"
+			icon="pi pi-print">
+			<p:printer target="index:ImpressionCaisse" />
+		</p:commandButton>
+	</h:form>
+
+</h:body>
+</html>

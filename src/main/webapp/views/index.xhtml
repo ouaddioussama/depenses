@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet name="style.css" library="css" />
+</h:head>
+
+<h:body>
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{HelpBean.anotherDisplay}" />
+	</f:metadata>
+
+
+	<p:growl id="kira" showDetail="true" globalOnly="true" />
+
+
+	<div class="ui-grid-col-11" style="width: 100%">
+
+
+		<p:tabView orientation="right" style="background-color: #f5f5f5;width:100%" id="index"
+			styleClass="hideTabHeader">
+
+
+
+			<p:tab title="Ajout depense Caisse">
+				<ui:include src="ajout_depenseCaisse.xhtml" />
+
+			</p:tab>
+
+			<p:tab title="Modif/Suppr depense Caisse" style="width:802px">
+				<ui:include src="m_d_depenseCaisse.xhtml" />
+
+			</p:tab>
+
+			<p:tab title="Impression Caisse" style="width:802px">
+				<ui:include src="impression_caisse.xhtml" />
+
+			</p:tab>
+
+			<p:tab title="Ajout depense Garde">
+				<ui:include src="ajout_depenseGarde.xhtml" />
+
+			</p:tab>
+
+			<p:tab title="Modif/Suppr depense Garde" style="width:802px">
+				<ui:include src="m_d_depenseGarde.xhtml" />
+
+			</p:tab>
+
+			<p:tab title="impression Garde" style="width:802px">
+				<ui:include src="impression_garde.xhtml" />
+
+			</p:tab>
+
+
+		</p:tabView>
+
+
+
+
+	</div>
+</h:body>
+
+</html>
