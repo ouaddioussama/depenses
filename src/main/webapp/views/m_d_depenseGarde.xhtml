@@ -112,7 +112,21 @@
 					</p:cellEditor>
 				</p:column>
 
+				<p:column headerText="pieces jointe"
+					style="width:10%;text-align: left; " >
 
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{t.pieces_jointe}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{t.pieces_jointe}" style="width:96%"
+								label="lib_depot" />
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				
 				<p:column headerText="Date Operation" style="text-align: left; "
 					filterBy="#{t.dateOperation}">
 

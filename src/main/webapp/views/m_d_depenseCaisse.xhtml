@@ -130,11 +130,17 @@
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-
+				
+				<p:column headerText="Date" filterMatchMode="contains"
+					style="width:10%;text-align: left; " filterBy="#{t.dateOperation}" >
 
 				<h:outputText value="#{t.dateOperation}">
 					<f:convertDateTime pattern="dd-MM-yyyy" />
 				</h:outputText>
+				</p:column>
+
+
+
 
 
 

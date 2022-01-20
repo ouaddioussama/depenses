@@ -13,7 +13,7 @@
 
 
 	<h:form id="ImpressionGarde">
-	<p:growl id="growl" life="1000" showDetail="true" />
+		<p:growl id="growl" life="1000" showDetail="true" />
 		<ui:repeat value="#{depenseService.selectedDepensesGarde}"
 			var="objectToSelectCaisse">
 
@@ -133,6 +133,12 @@
 						styleClass="text_normal" />
 					<h:outputLabel value="Directeur Général" styleClass="text_normal" />
 
+
+					<br></br>
+					<br></br>
+					<br></br>
+					<br></br>
+
 				</p:panelGrid>
 
 			</p:panel>
@@ -149,7 +155,8 @@
 	<h:form id="displaygarde">
 
 
-		<p:commandButton value="Valider l'impression" type="button" icon="pi pi-print">
+		<p:commandButton value="Valider l'impression" type="button"
+			icon="pi pi-print">
 			<p:printer target="index:ImpressionGarde" />
 		</p:commandButton>
 	</h:form>
